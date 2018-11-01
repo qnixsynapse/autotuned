@@ -55,7 +55,7 @@ udevadm control --reload-rules
   
 %files
 %license LICENSE
-%doc  AUTHORS %{SOURCE1}
+%doc  AUTHORS 
 /usr/bin/power
 /etc/udev/rules.d/powersave.rules
 /etc/systemd/system/power.service
