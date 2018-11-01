@@ -8,10 +8,10 @@ URL:        https://www.thisistodo.org
 Source0:    autotuned.tar.xz
 Source1:    README.md
 #Requirements
-Requires:   tuned%{_isa}
-Requires:   bash%{_isa}
-Requires:   iw%{_isa}
-Requires:   systemd%{_isa}
+Requires:   tuned
+Requires:   bash
+Requires:   iw
+Requires:   systemd
 
 #for systemctl and udev
 Requires:       /usr/bin/systemctl
