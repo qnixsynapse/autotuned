@@ -12,8 +12,7 @@ fi
 #TODO: Find a solution to check for laptop battery status which I don't have and is different from the path
 #make sure we are not on a desktop
 if [[  $BAT == "" ]]; then
-echo -e "We are on a Desktop!! Enable desktop settings"
-sudo tuned-adm profile desktop
+echo -e "We are on a Desktop!! No change"
 else
 	if [[ $STATE == "" ]]; then
  	 if [[ $(upower -i /org/freedesktop/UPower/devices/battery_${BAT} | grep state | grep discharging) == "" ]]; then
@@ -25,20 +24,30 @@ else
 	if [ $STATE == "BAT"   ]
 	then        
   echo "Discharging, set system to powersave"
-    /usr/sbin/tuned-adm profile powersave
-    /usr/sbin/tuned-adm active 
+    /usr/bin/cpupower frequency-set -g powersave
  	echo "Setting Wifi"
  	#It's told not to screenscape this tool however after doing tests we got what we wanted
  	/usr/sbin/iw @@WIFIDEV@@ set power_save on
-        /usr/sbin/iw @@WIFIDEV@@ get power_save       
+        /usr/sbin/iw @@WIFIDEV@@ get power_save 
+        # Disable nmi_watchdog
+        echo 0 > /proc/sys/kernel/nmi_watchdog
+        # kernel write mode
+        echo 5 > /proc/sys/vm/laptop_mode
+        echo 1500 > /proc/sys/vm/dirty_writeback_centisecs 
+           
 	else [ $STATE == "AC"   ]      
   echo "AC plugged in, set system to performance"
   #We are using ondemand here. Performance is always not necessary
-    /usr/sbin/tuned-adm profile balanced
-    /usr/sbin/tuned-adm active
+    /usr/bin/cpupower frequency-set -g ondemand
     echo "Setting Wifi"
  #It's told not to screenscape this tool however after doing tests we got what we wanted
  	/usr/sbin/iw @@WIFIDEV@@ set power_save off
-        /usr/sbin/iw @@WIFIDEV@@ get power_save   
+        /usr/sbin/iw @@WIFIDEV@@ get power_save 
+        # Enable nmi_watchdog
+        echo 1 > /proc/sys/kernel/nmi_watchdog
+        # kernel write mode
+        echo 0 > /proc/sys/vm/laptop_mode
+        echo 500 > /proc/sys/vm/dirty_writeback_centisecs
+  
 	fi
 fi

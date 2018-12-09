@@ -1,14 +1,14 @@
 Name:       autotuned
-Version:    0.5
+Version:    0.7
 Release:    1%{?dist}
-Summary:    A simple auto script for tuned which set power mode for wifi adapters too
+Summary:    A simple auto script which sets system power mode for wifi adapters too
 License:    GNU GPL3
 URL:        https://www.thisistodo.org
 #Sources
 Source0:    autotuned.tar.xz
 Source1:    README.md
 #Requirements
-Requires:   tuned
+Requires:   kernel-tools
 Requires:   bash
 Requires:   iw
 Requires:   systemd
@@ -62,23 +62,7 @@ udevadm control --reload-rules
 /etc/systemd/system/root-resume.service
 
 %changelog
-* Thu Nov 01 2018 Akarshan Biswas <akarshan.biswas@gmail.com> - 0.5-1
-- script now works on top of tuned
 
-* Tue Jul 31 2018 Akarshan Biswas <akarshan.biswas@gmail.com> - 0.4-2
-- Remove unsupported features and fix compatibility with intel cpus
-
-* Wed Jun 20 2018 Akarshan Biswas <akarshan.biswas@gmail.com> - 0.3-1
-- Set cpu on ac to be ondemand
-
-* Tue Jun 5 2018 Akarshan Biswas <akarshan.biswas@gmail.com> - 0.2-4
-- Set cpu on ac to be ondemand
-
-* Thu May 10 2018 Akarshan Biswas <akarshan.biswas@gmail.com> - 0.2-3
-- Fix wifi power saving mode
-
-* Sat May 05 2018 Akarshan Biswas <akarshan.biswas@gmail.com>
-- Initial release
 
 
 
