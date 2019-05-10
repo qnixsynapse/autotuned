@@ -8,7 +8,6 @@ URL:        https://www.thisistodo.org
 Source0:    autotuned.tar.xz
 Source1:    README.md
 #Requirements
-Requires:   kernel-tools
 Requires:   bash
 Requires:   iw
 Requires:   systemd
