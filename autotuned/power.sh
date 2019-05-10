@@ -24,7 +24,6 @@ else
 	if [ $STATE == "BAT"   ]
 	then        
   echo "Discharging, set system to powersave"
-    /usr/bin/cpupower frequency-set -g powersave
  	echo "Setting Wifi"
  	#It's told not to screenscape this tool however after doing tests we got what we wanted
  	/usr/sbin/iw @@WIFIDEV@@ set power_save on
@@ -37,8 +36,6 @@ else
            
 	else [ $STATE == "AC"   ]      
   echo "AC plugged in, set system to performance"
-  #We are using ondemand here. Performance is always not necessary
-    /usr/bin/cpupower frequency-set -g ondemand
     echo "Setting Wifi"
  #It's told not to screenscape this tool however after doing tests we got what we wanted
  	/usr/sbin/iw @@WIFIDEV@@ set power_save off
