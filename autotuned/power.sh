@@ -24,10 +24,12 @@ else
 	if [ $STATE == "BAT"   ]
 	then        
   echo "Discharging, set system to powersave"
+        /usr/bin/cpupower frequency-set -g ondemand
+        /usr/bin/cpupower frequency-info
  	echo "Setting Wifi"
  	#It's told not to screenscape this tool however after doing tests we got what we wanted
- 	/usr/sbin/iw @@WIFIDEV@@ set power_save on
-        /usr/sbin/iw @@WIFIDEV@@ get power_save 
+ 	/usr/sbin/iw wlp3s0 set power_save on
+        /usr/sbin/iw wlp3s0 get power_save 
         # Disable nmi_watchdog
         echo 0 > /proc/sys/kernel/nmi_watchdog
         # kernel write mode
@@ -36,10 +38,12 @@ else
            
 	else [ $STATE == "AC"   ]      
   echo "AC plugged in, set system to performance"
+  /usr/bin/cpupower frequency-set -g powersave
+        /usr/bin/cpupower frequency-info
     echo "Setting Wifi"
  #It's told not to screenscape this tool however after doing tests we got what we wanted
- 	/usr/sbin/iw @@WIFIDEV@@ set power_save off
-        /usr/sbin/iw @@WIFIDEV@@ get power_save 
+ 	/usr/sbin/iw wlp3s0 set power_save off
+        /usr/sbin/iw wlp3s0 get power_save 
         # Enable nmi_watchdog
         echo 1 > /proc/sys/kernel/nmi_watchdog
         # kernel write mode
